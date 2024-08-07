@@ -1,0 +1,104 @@
+Jenkins
+{a continuous integration tool}
+
+what happens in architecture 
+-> GitHub is integrated with Jenkins 
+-> use Maven to pull the necessary dependencies and compile the code.
+-> using selenium automated testing is done 
+-> As part of the Jenkins build process, you can configure automated tests to run using Selenium. 
+
+
+when single jenkins server is not sufficient then 
+-> set up an agent
+-> master slave is used
+-> master instructs to slave and accordingly they work
+
+
+the first step in Jenkins is build
+-> build means downloading dependencies that are required to build an application
+-> and compiling the code before executing
+
+->plugins 
+kise dusre tool ke sath kam karna hoga oth uska pligin install karna padegda
+
+How to integrate GitHub
+shh 
+ssh-keygen
+ls -a
+cd .ssh
+public and private will be seen 
+go to github setting add key add public one
+go to Jenkins create a job
+configure add git url then add credential and 
+select branch main
+build
+done 
+
+
+Tomcat integration using Jenkins
+
+what is jar and war files in java
+
+source - kernel is updated
+
+java-1.21.0-openjdk-amd64      2111       /usr/lib/jvm/java-1.21.0-openjdk-amd64
+ssh build agents
+Q regarding aws
+private ip rnages 
+
+<tomcat-users>
+  <role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <role rolename="manager-gui"/>
+  <role rolename="admin-gui"/>
+
+  <user username="tomcat" password="must-be-changed" roles="tomcat"/>
+  <user username="both" password="must-be-changed" roles="tomcat,role1"/>
+  <user username="manager" password="manager_password" roles="manager-gui"/>
+  <user username="admin" password="admin_password" roles="manager-gui,admin-gui"/>
+  <user username="role1" password="must-be-changed" roles="role1"/>
+</tomcat-users>
+
+
+
+
+
+
+
+Jenkins Q
+make a slave node and intergrate tomcat
+
+diff between scripted and  declarative script
+---> Focus: Scripted scripts focus on the process (how), while declarative scripts focus on the outcome (what).
+Complexity: Scripted scripts can handle complex logic and conditions, while declarative scripts are generally simpler and more straightforward.
+Maintenance: Declarative scripts tend to be easier to maintain and understand, especially for large and complex systems.
+
+know all plugins
+for pipeline and GitHub 
+ssh
+git
+pipeline stage view
+multibranch pipeline
+issue -> version
+      -> authentication
+
+
+
+
+
+*end to end testing
+-> when a software is release 
+it has individual components such as application server , web server , database
+-> so if individual testing is done then there might be complexity ad miscommunication
+-> so to avoid that we use E2E in which testing is done from start to end in smooth flow
+->also it replicates  real world scneraio its mimic is also done
+-> it is better than unit testing and intergration testing
+-> for this we use selenium
+
+
+attack on web
+ssl certificate
+hosting springboot application on aws
+host applications on ec2 instance
+
+

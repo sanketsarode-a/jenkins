@@ -1,0 +1,51 @@
+links
+add all the links
+
+-->networking
+https://www.scaler.com/topics/devops-tutorial/devops-networking/
+
+
+-->Jenkins basic
+https://medium.com/cloud-native-daily/jenkins-tutorial-basics-to-advanced-for-devops-engineer-27265e5ae67d
+
+-->deploy java application
+https://medium.com/@mudasirhaji/deploy-a-java-web-app-with-github-jenkins-maven-and-tomcat-on-aws-step-by-step-process-f813c11c9930
+
+-->add slave node
+https://chathura-siriwardhana.medium.com/step-by-step-guide-to-add-jenkins-slave-nodes-f2e756c8849e
+
+-->end to end testing
+https://www.lambdatest.com/learning-hub/end-to-end-testing
+
+
+-->Jenkins Pipeline
+https://medium.com/@riteshshetty123/best-jenkins-pipeline-tutorial-for-beginners-examples-4c8a195876e6
+
+-->java with maven on jenkins
+https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/
+
+-->DOcker 
+https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/
+
+list of practicals of Jenkins
+
+--> integrate Git with Jenkins 
+--> ec2 maven with jenkins
+--> tomcat with Jenkins {remaining }
+--> tomcat with ec2 done 
+--> java with maven
+--> node js with jenkins
+-->  slave node
+-->  pipeline using descriptive scripting
+--> pipeline using Scripted Pipeline
+
+linux'
+aws
+git command s
+jnkins practicals 
+
+windowa -120 gb
+Linux -8 
+ubuntu - 20
+
+UAT testing
