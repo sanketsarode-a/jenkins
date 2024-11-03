@@ -1,0 +1,121 @@
+Kubernetes
+orchestration tool
+types of clusters public and private
+the master is known as control plane 
+killercoda
+known host files
+
+
+
+Prometheus best monitoring tool
+
+Kubernetes architecture
+consist of master plane and set of worker nodes which are responsible for hosting pods in addition as the are multiple worker node
+ensures that the architecture is fault tolerance and highly available  
+
+fault tolerance --> the system runs smoothly in case of failure
+highly available --> to reduce downtime , such that it is accessible most of the time
+
+in master plane there are various components
+such as 
+
+API server --> 1. It is the front end of control Plane
+               2. helps user and other components to communicate with the
+                  cluster easily
+               3. whenever a pod restart or delete it first communicates with 
+                  API server
+
+Scheduler -->  1. to monitor the cluster and ensure the workload is balanced
+               2. it finds out the best node for the pod according to the priority
+               
+
+
+Controller --> 1. To maintain the desired states of containers
+Manager        2. there are different types of controller 
+                   deployment controller -> handles deployment of container
+                   replication --> in case ant pod fail there must be a replica
+                   state full container -->provides persistent storage the storage data that remains available when the pod are terminated
+                   Persistent Volume ensures that the data is retained and accessible across pod
+                   daemon controller --> specific pod runs on selected nodes only
+
+
+
+etcd -->  1. stores data in form of key value format
+          2. contains all the metadata about the components of Kubernetes
+             information about pods, their state, and namespaces
+
+
+
+Nodes --> worker node are primary execution unit
+          where actual workloads run
+          they can host multiple pods each containing one or more container
+          
+
+consist of 3 major components
+ 
+
+Kublet --> 1. it is a agent which helps in communicating worker node with
+              API server
+           2. works as per the podspec --> yaml configuration files
+           3. it uses container runtime for pulling images   
+           4. kublet starts the api server , scheduler , controller manager
+           5. kublet is the one who create , deletes modifies the container 
+              for the pod
+
+Kubeproxy -->  1. creates network rules to send traffic to pods 
+               2. kubeproxy handles the traffic and enables a backend pod for 
+                  load balancing
+               3. sometimes we can use network plugin (implements packet forwading)
+                  instead of kubeproxy
+               4. responsible for providing IP address and ports to pods
+
+Container runtime : 1.It is responsible for pulling images from registries and 
+                      maintaining lifecycle of containers
+                    2. essential for running containers
+                    3.  Kubernetes supports multiple container runtimes compliant   
+                         Docker Engine, and containerd.
+                    4.kublet interacts with CRI using APIS and hence provide 
+                      information to control plane 
+                
+
+
+docker 
+container runtime engine
+
+container --> a lightweight portable and executable image that contains software and all of its dependencies
+
+pod
+--> a group of container
+     smallest deployable units of computing that you can create and manage in Kubernetes.
+     they can run application containers, a Pod can contain init containers (start before the actual application container starts)
+     
+
+
+
+
+multiple services are not deployed in pod
+only one service is used mostly in multiple container and pods
+a side  car container is made to handle extra dependencies
+
+
+best practice 1 node 1 pod 1 container 1 service
+
+
+whenever a pod is deleted
+kubelet manages the lifecycle
+
+
+
+namespace :
+
+Namespaces in Kubernetes are a way to divide cluster resources between multiple users or groups. 
+
+Resource Segmentation: You can use separate environments for testing ,development
+
+Access Control: to restrict access to certain resources within a cluster.
+
+Resource Quotas : to limit the resources with a cluster such as cpu,memory
+
+Isolation :  namespace cannot provide a full isolation but they can give a logical boundary
+             
+
