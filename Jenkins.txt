@@ -21,6 +21,7 @@ when single jenkins server is not sufficient then
 
 create a node in jenkins
 which act as service agent
+if node set up then we can run specific job or stage such as selenium on another machine
 
 
 the first step in Jenkins is build
