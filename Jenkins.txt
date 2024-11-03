@@ -114,7 +114,17 @@ issue -> version
       -> authentication
 
 
+how to aadd sntp notification via gmail
+download email plugin add email and password
+after that in post build section enter the email 
 
+
+how to send slack notification
+create a free slack channel
+in congigure setting add cred
+enter workspace name and token name
+add post build slack notification
+https://medium.com/@sambit98530/integrate-jenkins-with-slack-e2691dd3cfce
 
 
 *end to end testing
