@@ -1,0 +1,224 @@
+k8 production system 
+
+minikube --> development environment 
+
+on production --> kubeadm
+
+Distribution
+--> taking the open source distribution example Linux
+--> and making own distribution by enhancing it more eg--> Amazon linux
+
+k8 Distribution
+--> EKS           AWS
+    openshift --> redhat
+    GKE           GCP
+
+how to manage 100 of clusters
+--> kops
+firstly we need a s3 bucket for storing 100 c
+after creating cluster
+we can give local domain
+or else we can we our custom domain
+
+
+Kubernetes operations
+-> k8 lifecycle
+deal with upgrade
+modification
+deletion
+
+--> kubeadm
+
+
+
+Deployments
+we will deploy a pod [wrapper]
+pod can be a single container or
+ multiple container
+--> shared network
+--> shared storage
+
+ips are for pods
+
+pods.yaml --> write all specification
+
+kubectl --> cli for k8
+
+
+container             vs pod vs                  deploy
+
+                                                1. autoscaling
+can be made using    instead of this            autohealing --> accidently a pod is deleted
+docker               just create a pod.yaml                     will create another
+                     and define what you need                   as per desired state
+                                                 create a replica set
+                     
+
+vs replica set
+
+--> controller feature which implements auto healing
+--> actual state that must be in cluster
+
+ReplicaSet ensures that a specific number of replicas (pods) are running. Its main focus is on maintaining the desired number of pods, but it doesn't handle versioning or updates.
+
+Deployment builds on top of ReplicaSets by managing updates and rollbacks. If you don't like a particular version of the deployment, you can easily roll back to a previous version, which isn't possible with a standalone ReplicaSet.
+
+
+
+
+
+
+**service
+
+why ?
+if normal  then
+deployment --> replica set --> pods --> containers
+
+example
+there are 3 pods
+1 goes down
+but i have used deployment so within milisec another pod will be generated
+problem here is the ip address changes
+and 3 people are accessing it i have provided ips for each one
+because the ip is changed the people are trying to access it is not reachable although a another pod is generated
+
+instead of accessing the ip use the service
+
+1.  on top up of my deployment i will use service 
+    that is nothing but load balancing
+    that is kubeproxy 
+
+2.  service discovery
+    if it keeping track of deployment
+    then it does not bother about ip address
+    what dose it do it uses 
+    Labels and Selectors
+    they will apply label for each pod 
+    whenever the pod goes down it still has the same label 
+
+    label key value pair
+    Labels categorize or identify objects.
+    Selectors use those labels to find and interact with objects dynamically.
+
+3.  Expose the world
+    how we access the machine
+    we created a deployment --> then pod --> whatever our cluster is eks,minikube,kubeadm
+    we can ssh into it and then hitting the pods ip see our application
+
+    but how does other traffic can access it
+    
+    in yaml we can define 3 types of service
+     1. cluster ip    ->  we can access it only in own cluster , default(eg frontend want to talk to backend)
+     2. node port     ->  inside within your organization  
+                           who ever has access to node (accessible only through specific ports)
+     3. load balancer ->  expose to external world
+                          ELB --> public ip address
+
+
+### **Comparison**:
+| Feature                   | Deployment                | ReplicaSet                 |
+|---------------------------|---------------------------|----------------------------|
+| **Primary Function**       | Manages ReplicaSets and updates | Ensures a fixed number of replicas |
+| **Rolling Updates**        | Yes                       | No                         |
+| **Rollbacks**              | Yes                       | No                         |
+| **Scaling**                | Yes                       | Yes                        |
+| **Self-healing**           | Yes                       | Yes                        |
+| **Use Case**               | Application management (updates, scaling, rollbacks) | Ensuring a specific number of replicas |
+
+In most cases, you'll use Deployments to manage your application rather than directly using ReplicaSets.
+
+
+
+
+
+
+
+ DaemonSet 
+--> ensures that all (or some) Nodes run a copy of a Pod
+examples ->   running a cluster storage daemon on every node
+              running a logs collection daemon on every node
+              running a node monitoring daemon on every node
+
+
+statefull 
+
+--> user login enter all credential 
+    next no need just name 
+    so it stores the state
+    known as statefull application
+
+1.problem (separate persistent volumes )
+but what if we have multiple replica of same
+so it didn't know the user as it was on first instance
+best practice recommended to save that in database
+
+if we use stateful application
+then separate volume for each pod and separate volumes
+
+2.problem (ordering of pods )
+master --> read and write
+
+slave 1-> read
+slave 2-> read
+
+first data come to master then it must be copied to slave 1 n then to slave 2
+to reduce load on master 
+
+in deployment all replica pods are created parallely
+
+while in kind service of stateful 
+created one by one
+first --> second --> third
+if first is failed to create it do not create another
+and if any is deleted then it deletes from last
+
+3.problem (sticky identity)
+
+able to access the each pod on a DNS even if the DNS changes
+there must be a way that even if pod restart it must have same name 
+name --> must stick to a pod
+
+if we use deployment random name is associated every time a new pod is created
+
+the naming will ordered
+example--> 3 replica of mongo DB
+           each gets a name as mongo1 -> mongo-2 -> mongo-3
+           same name and  also they have same persistent storage even it is restarted 
+
+
+a way talk to pod services whatever were act as a load balancer
+that means the request goes to a random pod
+but here need to talk to a specific pod 
+for that we use headless service
+
+cluster ip --> none
+each pod gets DNS entry --> directly goes mongo-0
+want to connect single pod (think like it is target groups )
+
+
+Press Esc to make sure you're in normal mode.
+Type ggVG to select all the content in the file. gg moves the cursor to the beginning of the file, V enters line-wise visual mode, and G extends the selection to the end of the file.
+Delete the Selected Content:
+
+With the content selected, press d to delete it. This clears the existing data in the file.
+
+
+
+
+
+configmaps
+api object which stores non confidential data
+in terms of key value pair
+max size --> 1 mb
+The name of a ConfigMap must be a valid DNS subdomain name
+10 ngnix - 10 vm --<> logs --> s3
+
+
+
+
+ and secrets
+
+
+
+
+
