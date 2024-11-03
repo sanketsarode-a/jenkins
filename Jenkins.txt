@@ -17,6 +17,7 @@ when single jenkins server is not sufficient then
 -> set up an agent
 -> master slave is used
 -> master instructs to slave and accordingly they work
+-> https://chathura-siriwardhana.medium.com/step-by-step-guide-to-add-jenkins-slave-nodes-f2e756c8849e
 
 create a node in jenkins
 which act as service agent
@@ -69,8 +70,11 @@ private ip rnages
 
 
 
+jenkins role based stratergy
 
-
+https://medium.com/@auasad/jenkins-role-based-authorization-strategy-8a194c76ac35
+developer has access to deveper job
+means we can create user for specific job
 
 
 Jenkins Q
@@ -91,6 +95,15 @@ Declarative Pipelines: Can run without an agent at the top level and allocate ag
 
 
 know all plugins
+1.role based auturization
+2.rebuilder plugin
+3.slack notification
+4.browser stack - take care of cross bowser testing
+5.mailer -- to send reports
+6.jira -- to raise bugs or ticket
+7.docker plugin -- add your cred they will be used in pipeline
+
+
 for pipeline and GitHub 
 ssh
 git
@@ -113,9 +126,6 @@ it has individual components such as application server , web server , database
 -> for this we use selenium
 
 
-attack on web
-ssl certificate
-hosting springboot application on aws
-host applications on ec2 instance
+
 
 
