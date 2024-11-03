@@ -1,6 +1,11 @@
 Jenkins
 {a continuous integration tool}
 
+by default it runs on 8080
+but we can customize it on docker 
+
+working directory of jenkins is var/lib/jenkins
+
 what happens in architecture 
 -> GitHub is integrated with Jenkins 
 -> use Maven to pull the necessary dependencies and compile the code.
@@ -12,6 +17,9 @@ when single jenkins server is not sufficient then
 -> set up an agent
 -> master slave is used
 -> master instructs to slave and accordingly they work
+
+create a node in jenkins
+which act as service agent
 
 
 the first step in Jenkins is build
@@ -68,10 +76,19 @@ private ip rnages
 Jenkins Q
 make a slave node and intergrate tomcat
 
-diff between scripted and  declarative script
----> Focus: Scripted scripts focus on the process (how), while declarative scripts focus on the outcome (what).
-Complexity: Scripted scripts can handle complex logic and conditions, while declarative scripts are generally simpler and more straightforward.
-Maintenance: Declarative scripts tend to be easier to maintain and understand, especially for large and complex systems.
+Scripted Pipelines: Require an agent (node) to be allocated at the beginning.
+                    primary based on grovvy syntax and executes all within the 
+                    node {} -- block
+                    Best for complex logic, custom Groovy scripting, and flexibility.
+                    
+Declarative Pipelines: Can run without an agent at the top level and allocate agents at specific stages only.
+                       more easy and executes all within the 
+                       pipeline {}  --block
+                       Best for simplicity, readability, and standardized pipelines
+
+
+
+
 
 know all plugins
 for pipeline and GitHub 
