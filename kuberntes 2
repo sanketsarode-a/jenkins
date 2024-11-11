@@ -29,14 +29,41 @@ deletion
 
 --> kubeadm
 
+Suppose a Application is deployed as a  type
+Deployment --> Deployment controller 
+|
+Replica set --> Replica controller
+
+how this work ?
+
+Best example 
+the above application is deployed  as microservices application in 
+Kubernetes with two containers (frontend and backend) in a single pod
+and service type load balancer 
+and i have set the replica count to 2
+
+so what will happen
+
+case 1  : Pod Failure (Pod Goes Down):
+
+If a pod fails (both containers inside)
+the LoadBalancer routes traffic to the remaining healthy pod.
+Kubernetes will automatically create a new pod to replace the failed one
+and the LoadBalancer will start routing traffic to it once it’s healthy.
+
+case 2 : Container Failure (Inside a Pod):
+
+If a container within a pod fails
+Kubernetes will restart the container without affecting the entire pod.
+The LoadBalancer continues to route traffic to the pod
+
+how loadbalncer works 
+Default Load Balancing: Traffic is split evenly (50/50) between the pods.
+Pod Failure: Traffic goes to the healthy pod. A new pod is created to replace the failed one.
+Session Affinity: Traffic from the same client is routed to the same pod (sticky sessions).
+Container Failure: Traffic continues to the pod, and Kubernetes restarts the failed container.
 
 
-Deployments
-we will deploy a pod [wrapper]
-pod can be a single container or
- multiple container
---> shared network
---> shared storage
 
 ips are for pods
 
