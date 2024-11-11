@@ -6,7 +6,6 @@ killercoda
 known host files
 
 
-
 Prometheus best monitoring tool
 
 Kubernetes architecture
@@ -24,19 +23,21 @@ API server --> 1. It is the front end of control Plane
                   cluster easily
                3. whenever a pod restart or delete it first communicates with 
                   API server
+               4. for communication 
+
 
 Scheduler -->  1. to monitor the cluster and ensure the workload is balanced
                2. it finds out the best node for the pod according to the priority
-               
+               3. api server tells scheduler --> i have received some workload 
 
-
+🚀this is amazing 🚀
 Controller --> 1. To maintain the desired states of containers
 Manager        2. there are different types of controller 
                    deployment controller -> handles deployment of container
                    replication --> in case ant pod fail there must be a replica
                    state full container -->provides persistent storage the storage data that remains available when the pod are terminated
                    Persistent Volume ensures that the data is retained and accessible across pod
-                   daemon controller --> specific pod runs on selected nodes only
+                   daemonset controller --> specific pod runs on selected nodes only
 
 
 
@@ -53,14 +54,26 @@ Nodes --> worker node are primary execution unit
 
 consist of 3 major components
  
+🚀**IMP🚀
+Kubelet --> 1. Pods are healthy or not 
+            2. works as per the podspec --> yaml configuration files
+            3. when request is made to pod
+               it is send to containerd --> then Runc --> then CNI plugin
+               why?
+              see runc is also a low-level container runtime
+              containerd uses runc as its default runtime
+              containerd --> manages higher operation like pulling images
+              Runc       -->  actual container creation and execution
+                              Without runc, containerd can’t manage containers on the node
+              CNI         --> Container Network Interface 
+                              essential for container networking
+                              enabling communication between pods
+                              provides IP to pods 
+                              Without a CNI plugin
+                              Kubernetes cannot set up the networking required for pod-to-pod
+             4. containerd + runc together create and run containers
+                CNI plugin (like Calico) provides the networking layer
 
-Kublet --> 1. it is a agent which helps in communicating worker node with
-              API server
-           2. works as per the podspec --> yaml configuration files
-           3. it uses container runtime for pulling images   
-           4. kublet starts the api server , scheduler , controller manager
-           5. kublet is the one who create , deletes modifies the container 
-              for the pod
 
 Kubeproxy -->  1. creates network rules to send traffic to pods 
                2. kubeproxy handles the traffic and enables a backend pod for 
@@ -68,6 +81,16 @@ Kubeproxy -->  1. creates network rules to send traffic to pods
                3. sometimes we can use network plugin (implements packet forwading)
                   instead of kubeproxy
                4. responsible for providing IP address and ports to pods
+
+about this communication part
+aur ye ip kon deta hai kubeproxy
+node ip      --> node IP is used for inter-node communication
+Pod ip       --> each pod has unique ip
+Container ip --> they share same ip as that of the pod
+                 when containers need to communicate with
+                 other containers in different pods
+                 they use the pod IPs to communicate
+
 
 Container runtime : 1.It is responsible for pulling images from registries and 
                       maintaining lifecycle of containers
