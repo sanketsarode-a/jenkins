@@ -1,1 +1,46 @@
 
+Azure Devops organization
+
+
+🚀 Azure repos (scm)    
+   same as that of github
+
+
+git vs TFVC
+you can git clone that into vscode and add microsoft cred
+
+it works as any change in vscode and commits will be reflected to azure repos (commits )
+
+so how it wokrs local will be (vs code )
+                remote will be ( azure repos)
+
+various options such as fork and adding github connection
+
+🚀 Azure devops pipeline
+
+   push to project
+   clone the file into vscode
+   add origin to vscode
+   push the file to azure repos
+
+
+🚀 azure app services 
+select web app --> no need to add nginx server or apache server just
+                   add the application code
+create web app
+
+create pipeline in ADO
+
+
+now to connect ado to azure portal we need service principal 
+
+so that we can securly connect  --> known as service connection
+
+🚀 create a service connection 
+    go to project setting --> service connection --> azure resource manager --> service principal (manual)
+                             add all cred done
+
+create a yaml file and done 
+
+
+
