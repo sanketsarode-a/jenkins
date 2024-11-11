@@ -129,7 +129,29 @@ blue green deployment
 that means if the pre is successful and prod also
 then swap them
 
+🚀🚀🚀🚀🚀---> azure boards 
+project management tools just like jira and notin
 
+1. workitem --> unit of work that needs to be tracked, such as a bug, task, user story, feature, or epic
 
+2. project --> basic -  epic , issue , task 
+               agile -
+               scrum -
+               cmmi  -
+the complexcity increases as goes down
+
+3. open the board section it will open a kanban board
+   which includes 3 section  { To do | Doing | Done }
+
+4.Try open board and create a Epic workitem by name  {angular website}
+  
+iteration \ sprint --> a deafult sprint 1
+stage can be changes --> to do | Doing | Done
+also custom tags
+also priority can be define
+the start date and Target  date need to be mention as per the sprint 
+and then mention someone in the decripition
+
+and then save and close move it to doing
 
 
