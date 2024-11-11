@@ -1,0 +1,216 @@
+errors encountered
+
+Prerequisite need 2 cpu and 8 gb ram 
+
+Initially was using docker for container runtime in node section
+But after kubernetes 1.24 docker has been removed as a default runtime
+Now we need to use container d for the same
+If you used docker as a runtime it is not compatible with kubernetes 1.29
+You will face the issue that container creating in pending state and the node will fail
+And hence the kubeproxy will fail it wont be able to communicate with the kubelet
+When we use kubedm init command 
+The flags must be set to 0.0.0.0 as the api server listen to this so there wont be any issue 
+Ip mismatch for calcio by default it runs on 
+
+
+
+Command need to be executed on both ec2 use a shellscript file will be easy
+Nano       k8s_master_setup.sh
+chmod +x k8s_master_setup.sh
+sudo ./k8s_master_setup.sh
+
+
+
+ 1.echo "Starting Kubernetes setup on Master EC2..."
+
+ 2. Disable Swap (necessary for Kubernetes)
+
+
+Why it is required → see swap is secondary memory that means when the actual ram on physical disk is utilized then it moves towards ssd space to use a swap memory
+
+Kubernetes uses the kubelet, which manages the container runtime 
+
+So what it has do with k8
+See when k8 requires some memory for container runtime
+So it prefer to use only ram memory instead of swap memory
+Because if container started using swap memory then it will cause
+Container termination
+
+So hence swap is disabled
+
+
+
+echo "Disabling swap..."
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+
+ 3. Forward IPv4 and Enable iptables Bridged Traffic
+
+Why →  necessary for pod to pod communication
+
+echo "Configuring IP forwarding and enabling bridged traffic for iptables..."
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+4. Set sysctl parameters required by Kubernetes and make them persistent
+
+echo "Setting sysctl parameters for Kubernetes networking..."
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+
+# Apply sysctl parameters without reboot
+sudo sysctl --system
+
+# 5. Verify Modules and System Variables
+echo "Verifying that overlay and br_netfilter modules are loaded..."
+lsmod | grep br_netfilter
+lsmod | grep overlay
+
+echo "Verifying sysctl network configuration values..."
+sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
+
+# 6. Install containerd as the Container Runtime
+
+echo "Installing containerd..."
+curl -LO https://github.com/containerd/containerd/releases/download/v1.7.14/containerd-1.7.14-linux-amd64.tar.gz
+sudo tar Cxzvf /usr/local containerd-1.7.14-linux-amd64.tar.gz
+
+echo "Setting up containerd service..."
+curl -LO https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+sudo mkdir -p /usr/local/lib/systemd/system/
+sudo mv containerd.service /usr/local/lib/systemd/system/
+
+# Configure containerd with systemd cgroup
+sudo mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+
+# Start and enable containerd service
+echo "Starting and enabling containerd service..."
+sudo systemctl daemon-reload
+sudo systemctl enable --now containerd
+
+# Check if containerd service is running
+echo "Checking containerd status..."
+
+# 7. Install runc
+echo "Installing runc..."
+curl -LO https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64
+sudo install -m 755 runc.amd64 /usr/local/sbin/runc
+
+# 8. Install CNI Plugins
+echo "Installing CNI plugins..."
+curl -LO https://github.com/containernetworking/plugins/releases/download/v1.5.0/cni-plugins-linux-amd64-v1.5.0.tgz
+sudo mkdir -p /opt/cni/bin
+sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.5.0.tgz
+
+ 9. Install 
+Kubeadm → set up master node and the worker nodes
+ Kubelet   → agent that run on each node and manage the container runtime
+Kubectl   → CLI
+
+
+echo "Installing kubeadm, kubelet, and kubectl..."
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt-get install -y kubelet=1.29.6-1.1 kubeadm=1.29.6-1.1 kubectl=1.29.6-1.1 --allow-downgrades --allow-change-held-packages
+sudo apt-mark hold kubelet kubeadm kubectl
+
+# Verify installations
+echo "Verifying versions of kubeadm, kubelet, and kubectl..."
+kubeadm version
+kubelet --version
+kubectl version --client
+
+# Note: Version 1.29 is installed to allow later upgrades to 1.30 in future steps.
+
+10. Configure crictl to work with containerd
+
+This the cli tool use to 
+interact with container runtimes in Kubernetes
+
+
+echo "Configuring crictl to use containerd as the runtime..."
+sudo crictl config runtime-endpoint unix:///var/run/containerd/containerd.sock
+After running this shellscript we can see the output as 
+
+So this were the common common needed to be executed on both ec2 
+
+Now for master 
+
+
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=0.0.0.0 --node-name master
+
+Why →
+sets up the Kubernetes API server and other core components like the scheduler and controller manager
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+Very imp → calcio network plugin
+To enable pod to pod communicationi
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml -O
+kubectl apply -f custom-resources.yaml
+
+
+
+
+Run this on worker node 
+
+kubeadm join 172.31.26.158:6443 --token 31z9ss.b022o8epivqc0ph4 \
+        --discovery-token-ca-cert-hash sha256:4affd2ff6100db18098b8efda22ec8e28c7c1872ab7b4f9744922ca145ae87b9
+
+
+
+Now check in the master node that is all pods and nodes running properly
+
+
+So all are running 
+
+Now if we want to check on the worker it will show error
+
+As it does not have have the admin.config file
+So for that we will copy it from master and paste into the worker
+
+Step 1 : on master 
+             cd /etc/kubernetes
+             ls
+             Cat admin.config
+             Copy all the content in it
+
+Step 2: cd /etc/kubernetes
+             Nano admin.config
+Step 3 : paste all the content
+              Now run some command in home directory of ubuntu
+
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+Now you will be able to seee the same status of pods and nodes in the worker node
+
+
+
+Now you will be able to set up master and worker node on 2 ec2
+
+
