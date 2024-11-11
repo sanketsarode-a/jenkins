@@ -1,0 +1,206 @@
+Terraform 
+
+terraform init 
+initializes a empty working directory
+
+terraform validate 
+checks for any syntax error
+
+terraform plan
+what actions are going to perform
+
+terraform apply 
+creates the necessary resource
+
+
+🚀 --1.reating any resource in terraform 
+
+
+start using ssh
+
+ssh -i private ip azureuser@52.168.45.32
+chmod 600 sanket2_key.pem
+install terraform
+create service principal-name
+
+
+install azure cli
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+az version
+az login
+az account show --query "{subscriptionId:id}"
+az ad sp create-for-rbac --name sanket --role="Contributor" --scopes="/subscriptions/b2bc2582-1e03-4a95-9d49-85411ee15e34"
+
+you will get 
+# Configure the Azure provider
+provider "azurerm" {
+  features {}
+
+
+}
+add public key in admin_ssh_key block
+
+
+🚀 variables
+2 types
+1 input as passing values from variables.tf
+
+2.output as when apply is completed print something such as ip 
+can be passed as default value or 
+make seprate terraform.tfvars file for that
+in that hardcode the values
+
+
+🚀 modules
+
+define modules for each resource
+and in just main.tf add the source from where the modules need to be fetched
+do not hardcode the values use variables 
+also we can use modules
+
+
+azure-vm-module/
+├── main.tf            # Core Terraform configuration for the VM
+├── variables.tf       # Definitions of input variables (like VM size, image, etc.)
+├── outputs.tf         # Definitions of output variables (like the public IP of the VM)
+├── providers.tf       # Configuration for the Azure provider
+├── network.tf         # (Optional) Configuration for the Virtual Network, Subnet, NSG
+├── data.tf            # (Optional) Data sources like existing resource groups, etc.
+└── README.md          # Documentation for using the module
+
+
+aur root directory mein
+--> Important to add source 
+module "azure_vm" {
+  source              = "./azure-vm-module"  # Path to your module
+  vm_name             = var.vm_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  vm_size             = var.vm_size
+  admin_username      = var.admin_username
+  admin_password      = var.admin_password
+  subscription_id     = var.subscription_id
+}
+
+
+
+🚀 terraform state files (keeps record infrastructure's current state )
+some vulnerabilities --> iy may store subscription id and service principal
+
+best way always store them in s3 bucket as backend 
+nothing but azure blob container as -> backend  storage
+create a container
+
+
+
+
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "your-resource-group"
+    storage_account_name  = "your-storage-account-name"
+    container_name        = "terraform-state"
+    key                   = "terraform.tfstate"   # The name of the state file
+  }
+}
+
+
+🚀 locking mechanism
+in aws need to configure seprate dynamo db table for this
+
+and in azure no need blob storage manages it automatically
+
+
+🚀  Terraform Provisner
+create a infrastructure so that it test the code changes will work perfectly or not
+using provisiner --> we can run any command 
+
+2types
+1. remote exec provisiner --> execute any command like install any new application
+                              just like shell commands 
+2.local exex --> prints the info on console
+                  when terraform apply is used
+
+3. file provisiner --> copy some files (json,yaml)
+
+
+🚀 terraform workspaces
+
+if we want to create multiple ec2 instnaces 
+such 1 ec2 for dev micro
+     1 ec2 for prod medium
+     1 ec2 for stageing
+
+
+It can happen but the main.tf file will be messed up
+so workspaces will create a separate state file for each ec2
+
+
+tree
+
+create a module --> inside that instance info
+                    main.tf
+                    variable.tf
+                    provider.tf
+after create a  --> terraform.tfvars
+                     hardcode the value
+                     main.tf
+ 
+                   
+   
+
+                 1.terraform workspace new dev
+                 2.terraform workspace new prod
+                 3.terraform workspace new stage
+
+this will create a folder by name terraform.tfstate.d
+                 inside that there will be three file 
+                dev
+                prod
+                stage
+
+switch to workspace
+
+ terraform workspace select dev
+terraform   workspace show
+
+now when we use apply
+statefile will be created at dev workspace
+not at root folder
+
+
+🚀 initialize backend  using ADO as a pipeline
+
+step 1 : import the repo into azure repos 
+
+step 2 : click on set up build 
+         click on starter pipeline
+  
+
+$(Build.SourcesDirectory)
+
+$(build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+
+simple he yaml banna using assistnat 
+
+
+manage engine --> konsi service hai jo cloud 
+
+cloud mein similar 
+
+
+
+Azure artifacts 
+
+to manage all the dependencies in a single feed 
+that serve as a repositories 
+
+azure feed --> Azure Artifacts feeds are  allow you to store, manage, and share your packages while controlling access
+
+package --> maven , npm ...etc
+
+hawkscan
+
+
+
+
+
