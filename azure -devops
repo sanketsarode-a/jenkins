@@ -1,10 +1,7 @@
-
 Azure Devops organization
-
 
 🚀 Azure repos (scm)    
    same as that of github
-
 
 git vs TFVC
 you can git clone that into vscode and add microsoft cred
@@ -39,8 +36,100 @@ so that we can securly connect  --> known as service connection
 🚀 create a service connection 
     go to project setting --> service connection --> azure resource manager --> service principal (manual)
                              add all cred done
+    create a yaml file and done 
 
-create a yaml file and done 
+
+
+
+🚀🚀🚀🚀🚀---> Deploy a application using azure web apps
+
+1. import the repo
+2. Build the pipeline add stages after build add artfact stage
+   according to application
+    task: PublishBuildArtifacts@1
+            displayName: "Save Artifact"
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'container'
+
+3. now add the deployment stage 
+   in that add everthing you need according to azure web apps
+   please select the proper artifact destination
+
+4.stage: DevelopmentStage
+    displayName: "Deploying to Development Environment"
+    jobs:
+      - deployment: Dev
+        pool:
+          vmImage: ubuntu-latest
+        environment: Dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: 'Devops-dev-svc'
+                    appType: 'webAppLinux'
+                    appName: 'app-bdo-sut-apisvc-dev-0011'
+                    package: '$(Pipeline.Workspace)/drop/*.zip'
+
+
+
+
+🚀🚀🚀🚀🚀---> Deploy a application using azure web apps with release pipeline
+
+ 1 : create a release pipeline 
+           select template azzure web apps
+
+2 : select the artifact enable the cd
+          on default pipeline branch
+
+3 : pre deployment condition
+            
+        trigger after release
+        artifacts filter --> which branch
+       
+        add the task --> azure web service 
+                         service connection
+
+and that all
+app type web app on Linux
+the app service created on azure portal
+
+run on agent azure pipeline
+ubuntu latest
+
+
+do you need deployment slot 
+it is prechecking instead of deploying to prod
+
+select resource group
+
+and create a slot on azure portal 
+under deployment 
+create one slot
+
+go back to pipeline 
+there will the staging slot
+
+and for the package of folder select from browse 
+the name of the artifact
+
+
+check upon the runtime stack 
+needed on both portal as well as azure web app
+node js 20x
+
+do we want test on pre deploymne and then prod deployment 
+
+blue green deployment
+
+that means if the pre is successful and prod also
+then swap them
+
+
 
 
 
