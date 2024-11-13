@@ -1,1 +1,23 @@
+kubectl get pods -A
+kubectl get nodes
+
+kubectl run nginx --image=nginx
+
+
+
+cd /etc/kubernetes
+ls
+admin.conf               kubelet.conf  pki             super-admin.conf
+controller-manager.conf  manifests     scheduler.conf
+
+this admin.config is responsible for communicating pods and nodes
+
+cluster se communicate kaise karte hai
+cd ~/.kube       
+pwd
+/root/.kube
+
+
+
+
 
