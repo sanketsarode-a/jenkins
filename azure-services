@@ -37,8 +37,16 @@ then we create a domain controller in that particular region
 
 Microsoft Entra-ID
 
-Register an application in ad
+ 
 
+************************
+Register an application 
+*************************
+give a name
+select the tenant type
+Redirect URL --> ok so if my angular application i can use it for authencation
+                 once done go back to my angular
+                https://yourapp.com/auth/callback
 
 
 
