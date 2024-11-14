@@ -16,6 +16,14 @@ cluster se communicate kaise karte hai
 cd ~/.kube       
 pwd
 /root/.kube
+ls
+
+
+content of kube config
+cluster
+context:-
+user
+
 
 
 
