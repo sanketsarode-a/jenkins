@@ -1,1 +1,50 @@
+Azure ad
+Primary use --> authentication and login
+
+before azure ad -->
+EK virtual machine hai
+3 user hai jo shift mein kam karte hai
+har ek username and pasword se login karte hai
+
+or else someone forgots the password then what ??
+
+SO HOW does active directory helps ?
+A server --> install active directory
+then that server is known as Domain controller
+
+ek boundary --> and user ka laptop uss domain mein register kar denge
+aur user ke cred uss Active Directory mein daldiye
+
+ab wohh map rahenge user ke pass uska pass id and same --> map to AD
+in this way there can be multiple users 
+
+ad --> pe account bana diya kahi se bhi login karo --> that authenticates it
+if forgots his password then we can change it from AD and he can login again
+
+Suppose there is web application and it requires your company user and password
+then we can link web application to --> azure active directory
+now all user can securely login using the same id pass
+
+very IMP --> id ad fail then no one can login
+
+we will create a Domian controller related to AD
+then they can use that domain contoller
+basically it can be also used to minimize the latency
+
+replicate AD
+then we create a domain controller in that particular region
+
+
+Microsoft Entra-ID
+
+Register an application in ad
+
+
+
+
+
+
+
+
+
 
