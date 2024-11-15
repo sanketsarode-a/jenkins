@@ -1,7 +1,7 @@
-Azure ad
+🚀Azure ad
 Primary use --> authentication and login
 
-before azure ad -->
+🚀before azure ad -->
 EK virtual machine hai
 3 user hai jo shift mein kam karte hai
 har ek username and pasword se login karte hai
@@ -40,7 +40,7 @@ Microsoft Entra-ID
  
 
 ************************
-Register an application 
+🚀Register an application 
 *************************
 give a name
 select the tenant type
@@ -48,11 +48,21 @@ Redirect URL --> ok so if my angular application i can use it for authencation
                  once done go back to my angular
                 https://yourapp.com/auth/callback
 
+🚀RBAC
+role based access control
+just like iam roles and groups
 
+🚀Azure key vaults
+Disk can be encrypted with key so that data in the disk remains safe 
+in case someone get hands on our disk then he wont be able to get our data
 
+in database username and password -->storing this 
+certifacates can be aslo store
 
-
-
-
+🚀Azure functions
+serverless compute service
+we need to give only code rest backend services manage by azure
+everything autumatic 
+increase decrease according to traffic
 
 
