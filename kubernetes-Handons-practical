@@ -25,6 +25,11 @@ context:-
 user
 
 
+instead of kubectl we can use endpoint 
+that interact with each other 
+using Rest APIS
+
+
 
 
 
