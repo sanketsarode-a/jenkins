@@ -65,4 +65,65 @@ we need to give only code rest backend services manage by azure
 everything autumatic 
 increase decrease according to traffic
 
+🚀Azure devops rest API
+There are lots of thing that can be autumated using rest API
+
+eg- Pipeline
+    release
+    Approvals
+there are post api 
+and we want to get build status we will use get API
+it is available 
+PAT token for authentication
+defination id of pipeline --> to autu-trigger
+
+use method invoke for that post API
+
+pipeline run hone ke baad build id nikalo jiske baad mein pipeline ka status check kar sake
+uske baad if condition lagayie
+if success --> clear cache
+if not --> raise a issue
+
+🚀Azure Cache for redis
+end user ---> APP ---> usko kisi database se connect kiya 
+                  <---
+ 
+Okay database is too large-->then what happens data rettrival takes a long time
+so in order to reduce this we use azure redis cache
+
+1 st way --> along with application
+2 nd way --> along with database --> instead of seraching data in database searches it in cache
+                                     but if data not found then goes in main database
+                                     and stores in cache for future use
+🚀Azure SQL database
+Relational database --> table format (rows and columns)
+2 resources are created 1.database
+                        2.database server
+so we need seprate or one
+it has name and password
+it must be stored in azure key vault
+
+
+three Deployment methods
+single           -->  isolated
+Elastic pool     -->  collection of single
+Managed instance -->  costly
+
+purchasing option 
+DTU
+vcore
+serverless
+
+how to connect ?
+connection string to be stored in azure vaults
+
+
+
+
+
+
+
+
+
+
 
