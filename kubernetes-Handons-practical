@@ -69,6 +69,7 @@ if we want to combine out 2 yaml files then use
 ---
 
 🚀init container
+if we this then they run properly in a sequentcial manner
 init container always run to --> completion
 these are defined because before the main application container run these are runned frist
 and to check whether a file or service exist or not
@@ -87,7 +88,6 @@ suppose 2 (both share common resources)
 that can be log container   --> 
 that can be Proxy container --> first request goes to sidecar then after authentication goes
                                 to main container
-also use full in pod -- pod communication using side car container
 
 
 🚀Service Mesh --> padh lena 
