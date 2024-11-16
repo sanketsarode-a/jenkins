@@ -67,7 +67,7 @@ Kubelet --> 1. Pods are healthy or not
                               Without runc, containerd can’t manage containers on the node
               CNI         --> Container Network Interface 
                               essential for container networking
-                              enabling communication between pods
+                          🚀  enabling communication between pods
                               provides IP to pods 
                               Without a CNI plugin
                               Kubernetes cannot set up the networking required for pod-to-pod
