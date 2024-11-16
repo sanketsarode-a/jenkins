@@ -68,6 +68,17 @@ or pipe |
 if we want to combine out 2 yaml files then use
 ---
 
+🚀init container
+init container always run to --> completion
+these are defined because before the main application container run these are runned frist
+and to check whether a file or service exist or not
+create a init container
+in that add 2 init contiane ad then a main
+the mian will slepp untill these two are run
+
+
+🚀kubernetes object job -- padh lena
+
 
 
 
