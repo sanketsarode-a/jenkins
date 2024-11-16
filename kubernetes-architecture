@@ -107,11 +107,16 @@ container runtime engine
 
 container --> a lightweight portable and executable image that contains software and all of its dependencies
 
-pod
---> a group of container
+🚀pod
+-->  for pod we need a container runtime
+     there can be single or multiple container in pod
+     pod ki ip based upon the cidr defined
+     all podds will be uder this cidr 
      smallest deployable units of computing that you can create and manage in Kubernetes.
      they can run application containers, a Pod can contain init containers (start before the actual application container starts)
      
+learn what is that sandbox creation state 
+on official kubernetes documentation
 
 
 
