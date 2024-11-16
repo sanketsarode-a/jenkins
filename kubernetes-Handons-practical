@@ -30,7 +30,20 @@ that interact with each other
 using Rest APIS
 
 
+🚀Deployment is a kind there can be more such kinds
+and when called by curl/Rest API ---> then it is a resource
+if core services then --> empty group --> v1
 
+
+GVK --> Group version kind
+if kind :- pod
+then core group empty so version is --> v1
+if kind :- networking
+then core group empty so version is --> v1
+
+
+
+GVR --> Group version resource
 
 
 
