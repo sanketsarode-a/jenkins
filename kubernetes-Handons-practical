@@ -79,6 +79,20 @@ the mian will slepp untill these two are run
 
 🚀kubernetes object job -- padh lena
 
+🚀Multi-container Pod with -- Side car Container
+
+suppose 2 (both share common resources)
+1 main container     ->  
+1 side car container ->  
+that can be log container   --> 
+that can be Proxy container --> first request goes to sidecar then after authentication goes
+                                to main container
+also use full in pod -- pod communication using side car container
+
+
+🚀Service Mesh --> padh lena 
+infrastructure layer that manages communication between microservices
+Provides an interface for operators to define policies for traffic management
 
 
 
