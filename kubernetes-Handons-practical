@@ -48,6 +48,38 @@ steps are in github repo
 we are creating using rest api
 therefore it is known as resource
 
+🚀Clusters
+
+har ek cluster ki details
+that is object
+har ek context ke andar 
+ye hai
+everything is key-value pair
+syntax imp
+
+Specs -- Containers 
+can be single or can be multiple
+
+kind:- ConfigMap
+agar eksath muliplt line then
+{{}}
+or pipe |
+
+if we want to combine out 2 yaml files then use
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
