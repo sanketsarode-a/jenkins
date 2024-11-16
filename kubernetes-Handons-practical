@@ -41,9 +41,13 @@ then core group empty so version is --> v1
 if kind :- networking
 then core group empty so version is --> v1
 
-
-
 GVR --> Group version resource
+
+🚀 create service account --> this is nothing but a user
+steps are in github repo 
+we are creating using rest api
+therefore it is known as resource
+
 
 
 
