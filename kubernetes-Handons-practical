@@ -93,7 +93,8 @@ also use full in pod -- pod communication using side car container
 🚀Service Mesh --> padh lena 
 infrastructure layer that manages communication between microservices
 Provides an interface for operators to define policies for traffic management
-
+also use full in pod -- pod communication using side car container
+isse -->security heal check sab ho jata hai
 
 
 
