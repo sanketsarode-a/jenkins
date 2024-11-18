@@ -77,6 +77,10 @@ create a init container
 in that add 2 init contiane ad then a main
 the mian will slepp untill these two are run
 
+how it differs from sidecar contains
+--> init can contain diff image
+init containers are not continuously running alongside the main
+do not support lifecycle, livenessProbe
 
 🚀kubernetes object job -- padh lena
 
@@ -95,14 +99,6 @@ infrastructure layer that manages communication between microservices
 Provides an interface for operators to define policies for traffic management
 also use full in pod -- pod communication using side car container
 isse -->security heal check sab ho jata hai
-
-
-
-
-
-
-
-
 
 pod disrupting 
 
