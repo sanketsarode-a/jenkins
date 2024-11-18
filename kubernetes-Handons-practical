@@ -82,6 +82,13 @@ how it differs from sidecar contains
 init containers are not continuously running alongside the main
 do not support lifecycle, livenessProbe
 
+
+🚀Side car container
+you only have one app container in a Pod. For example,
+if you have a web application that requires a local webserver,
+the local webserver is a sidecar and the web application itself is the app container.
+
+
 🚀kubernetes object job -- padh lena
 
 🚀Multi-container Pod with -- Side car Container
