@@ -55,7 +55,7 @@ Nodes --> worker node are primary execution unit
 consist of 3 major components
  
 🚀**IMP🚀
-Kubelet --> 1. Pods are healthy or not 
+Kubelet --> 1. an agent that checks Pods are healthy or not 
             2. works as per the podspec --> yaml configuration files
             3. when request is made to pod
                it is send to containerd --> then Runc --> then CNI plugin
