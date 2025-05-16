@@ -1,0 +1,145 @@
+# Define specific branch to be trigger
+trigger:
+  branches:
+    include:
+      - main
+
+# variable-- Define once and that can be used throughout the pipeline example we use define credentials
+# and enviornment -- Agent to run the pipeline can be self hosted or azure by default
+variables:
+  buildconfiguration: 'release'
+  vmImage: 'Ubuntu-latest'
+
+# stages
+stages:
+
+  - stage: buildstage
+    jobs:
+      - job: build
+        steps:
+          - script: echo building
+
+      - job: test
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '14'
+          - script: npm run build
+          - script: echo "testing"
+
+  - stage: deploystage
+    jobs:
+      - job: deploy
+        steps:
+          - script: echo "deploying"
+
+
+Pipeline
+│
+├── trigger
+│   └── branches
+│       └── include
+│           └── main
+│
+├── variables
+│   ├── buildconfiguration
+│   └── vmImage
+│
+└── stages
+    ├── stage: buildstage
+    │   └── jobs
+    │       ├── job: build
+    │       │   └── steps
+    │       │       └── script
+    │       └── job: test
+    │           └── steps
+    │               ├── task: NodeTool@0
+    │               ├── script
+
+🔍 Simplified Overview
+Trigger: Starts the pipeline when code is pushed to the main branch.
+Variables: Reusable values like environment settings (vmImage, buildconfiguration).
+Stages: Main parts of the pipeline (e.g., buildstage, deploystage).
+Jobs: Each stage has one or more jobs (e.g., build, test, deploy).
+Steps: Inside each job — what you want the job to actually do.
+Tasks: Built-in functions (e.g., set up Node.js).
+Scripts
+
+
+
+
+
+JENKINSFILE
+
+Declarative and scriptes 2 ways
+
+in declarative we require more knowledge as it is based on grovvy syntax 
+and also contain more features
+declarative starts with
+pipeline {
+    agent any
+
+    environment {
+        name = "sanket"
+    }
+
+    stages {
+        stage('Fetch') {
+            steps {
+                git branch: 'main', url: 'https://your-repo-url.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'docker build -t your-image-name .'
+            }
+        }
+    }
+}
+
+pipeline
+│
+├── agent any
+├── environment
+│   └── name = "sanket"
+├── stages
+│   ├── stage: fetch
+│   │   └── steps
+│   │       ├── git branch
+│   │       └── git url
+│   └── stage: build
+│       └── steps
+│           └── docker build
+
+✅ Declarative Jenkinsfile – Simple Overview
+Starts with pipeline {}
+
+agent any: Defines where the pipeline will run (any available node).
+environment {}: Set environment variables (e.g., name = "sanket").
+stages {}: Contains multiple stages like fetch, build.
+Each stage:
+Has a name (e.g., 'fetch')
+Contains steps:
+Commands or actions (e.g., git, docker build).
+Declarative requires more structure and uses Groovy-based syntax with richer features.
+
+
+while scripted is simple
+scripted starts with 
+node
+└── stage: fetch
+    └── git branch + url
+└── stage: build
+    └── docker build
+
+
+Scripted Jenkinsfile – Simple Overview
+Starts with node {}
+Inside node, you can define stage blocks and run commands directly.
+It’s more flexible, but requires you to write logic manually (like conditionals, loops, etc.).
+Good for quick or custom workflows.
+
+
+
+
