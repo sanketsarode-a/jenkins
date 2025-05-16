@@ -1,1 +1,37 @@
+# Define specific branch to be trigger
+
+trigger:
+   branch:
+     include:
+       -main
+
+
+# variable-- Define once and that can be used throughout the pipeline example we use define credentials
+# and enviornment -- Agent to run the pipeline can be self hosted or azure by default
+
+variables:
+      buildconfiguration : 'release'
+      vmImage : 'Ubuntu-latest'
+
+#stages
+
+stages:
+
+   -stage : buildstage
+     jobs:
+        -job:build
+            steps:
+              -script : echo building
+   -stage : deploystage
+     jobs:
+         -job:deploy
+             steps:
+               -script: echo deploying
+
+
+similar way you can have that
+
+      
+    
+
 
