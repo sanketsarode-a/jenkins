@@ -1,1 +1,33 @@
+docker
+a simple runtime containerization tool
+that helps us to build images and run those on containers
+image a template of all dependancies require to run a application
 
+Difference between container and virtual machine
+light weight contain only dependancies require to run a application
+while VM contain all OS 
+
+A basic docker file to run a nodejs app
+
+FROM node:latest
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD ["node","server.js"]
+
+
+DIFF betweeen CMD and ENTRYPOINT
+
+CMD - can be overidden 
+like 
+FROM ubuntu
+CMD ["echo", "Hello from CMD"]
+
+docker run myimage           # Outputs: Hello from CMD
+docker run myimage ls -l     # Outputs: result of `ls -l` (CMD overridden)
+
+
+ENTRYPOINT - 
+Defines the main command to always run when the container starts
+Mandatory behavior
+Best For	Flexible usage	Fixed workflows
