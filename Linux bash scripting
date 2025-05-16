@@ -1,1 +1,19 @@
+start with om here we use shebang
+#!/bin/bash
+this tells the os which shell to use like we can multiple
+sh
+zsh
+bash
 
+simple if else create a file by name  if it matches 
+imp tip there should be proper spacing in between the if and elif conditions
+
+
+#!/bin/bash
+read -p "enter the name" filename
+if [[  $filename == sanket ]];
+then
+    touch $filename.txt
+else
+echo "wrong name"
+fi
