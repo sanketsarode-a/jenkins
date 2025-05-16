@@ -29,3 +29,22 @@ for ((i=0; i<5; i++));
 do
         touch demo$i.txt
 done
+
+#################
+functions 
+#################
+#!/bin/bash
+
+create_file_if_match() {
+    read -p "Enter the filename: " filename
+    if [[ "$filename" == "tomI" ]]; then
+        touch "$filename.txt"
+        echo "File '$filename.txt' created."
+    else
+        echo "Filename does not match 'tomI'. No file created."
+    fi
+}
+
+# Call the function
+create_file_if_match
+
