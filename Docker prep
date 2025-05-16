@@ -1,4 +1,6 @@
 docker
+docker exec -it <container_id> sh
+
 a simple runtime containerization tool
 that helps us to build images and run those on containers
 image a template of all dependancies require to run a application
