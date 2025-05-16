@@ -76,6 +76,10 @@ Declarative and scriptes 2 ways
 in declarative we require more knowledge as it is based on grovvy syntax 
 and also contain more features
 declarative starts with
+one more thing we can add direct normal commands using sh
+like
+sh 'npm run install'
+
 pipeline {
     agent any
 
