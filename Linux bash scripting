@@ -8,7 +8,9 @@ bash
 simple if else create a file by name  if it matches 
 imp tip there should be proper spacing in between the if and elif conditions
 
-
+#################
+if else  
+#################
 #!/bin/bash
 read -p "enter the name" filename
 if [[  $filename == sanket ]];
@@ -17,3 +19,13 @@ then
 else
 echo "wrong name"
 fi
+
+#################
+for loop
+#################
+
+#!/bin/bash
+for ((i=0; i<5; i++));
+do
+        touch demo$i.txt
+done
