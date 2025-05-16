@@ -19,6 +19,7 @@ CMD ["node","server.js"]
 DIFF betweeen CMD and ENTRYPOINT
 
 CMD - can be overidden 
+Flexible usage
 like 
 FROM ubuntu
 CMD ["echo", "Hello from CMD"]
@@ -30,4 +31,4 @@ docker run myimage ls -l     # Outputs: result of `ls -l` (CMD overridden)
 ENTRYPOINT - 
 Defines the main command to always run when the container starts
 Mandatory behavior
-Best For	Flexible usage	Fixed workflows
+Best For		Fixed workflows
