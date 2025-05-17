@@ -23,6 +23,7 @@ if name=="sanket":
 else:
    print("incorerct")
 
+we 
 
 
 ARRAY --> LIST
@@ -79,3 +80,9 @@ def checkcpu(command):
 checkcpu('ls')
 
 
+we can create either passing a paramerter or direct with a return statement as well 
+
+def checkls():
+   return print(os.system('ls'))
+
+print(checkls())
