@@ -67,3 +67,15 @@ for system
 system
 
 
+
+we can create different function to print it
+like
+
+
+import os
+command = "ls"
+def checkcpu(command):
+    print(os.system(command))
+checkcpu('ls')
+
+
