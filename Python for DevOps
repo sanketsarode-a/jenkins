@@ -105,3 +105,10 @@ source = "/home/tomcat"
 destination = "/home/tomcat/backup"
 
 backup_files(source, destination)
+
+
+####################
+similarly we can connect using access and sceret acces to aws
+and using boto3 library we can do anything on aws like terrafrom features as well as additiional
+now we uploaded this backup file on aws s3 bucket using boto3
+####################
