@@ -43,3 +43,27 @@ and for range
 
 for i in range(0,10):
      print(i)
+
+
+
+#####################
+Main part Python libraries
+####################
+
+when we want to do operations on os level
+we use library called 
+os 
+how to use
+
+import os
+use any linux commnad
+print(os.system('ls'))
+
+
+for shell
+shutil
+
+for system
+system
+
+
