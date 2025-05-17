@@ -23,3 +23,23 @@ if name=="sanket":
 else:
    print("incorerct")
 
+
+
+ARRAY --> LIST
+
+array = ['a','b','c','d']
+print(array)
+print(len(array))
+array.append('g')   --> at last pos
+array.insert(3,'x') --> ar particular pos
+
+
+
+easy for loop for printing an array
+for demo in array:
+    print(demo)
+
+and for range
+
+for i in range(0,10):
+     print(i)
