@@ -1,1 +1,25 @@
+lets start with basic 
+you know the logic mostly probably you will forget the syntax
+
+so 
+normal
+for print we use 
+
+print("sanket")
+
+for a if else condtion
+for a input we use
+
+name = input("enter the name :")
+by deafult it takes the string value 
+
+if you want an int then typecast it
+as 
+num1 = int(input("enter the number")
+
+
+if name=="sanket":
+   print("corerct name")
+else:
+   print("incorerct")
 
