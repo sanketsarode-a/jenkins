@@ -1,4 +1,13 @@
 Terraform 
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state-bucket"
+    key            = "path/to/myproject/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-locks"  # Optional but recommended
+    encrypt        = true
+  }
+}
 
 terraform init 
 initializes a empty working directory
