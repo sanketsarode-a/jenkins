@@ -50,13 +50,11 @@ create_file_if_match
 
 
 #################
-Deploy  A django app
+HOW 
 #################
 
-create function for each step 
-add if and then blocks for error handling
-after that the steps like same we use in cicd fetch,test,build,deploy
-and then run the script it would work as same
+
+
 
 
 
